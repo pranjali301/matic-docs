@@ -1,7 +1,7 @@
 ---
 id: archive-node
 title: Setup an Archive Node
-sidebar_label: Setup Archive Node
+sidebar_label: Set up an Archive Node
 description: Using binaries to set up an archive node
 keywords:
   - erigon

@@ -1,7 +1,7 @@
 ---
 id: erigon-client
 title: Set up an Erigon Client
-sidebar_label: Setup Erigon Client
+sidebar_label: Set up an Erigon Client
 description: System requirements and client setup for Erigon based Archive Nodes.
 keywords:
   - erigon

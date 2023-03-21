@@ -21,7 +21,7 @@ import TabItem from '@theme/TabItem';
 }>
 <TabItem value="mumbai">
 
-## Mumbai :fuelpump:
+## Mumbai
 [MATIC token](https://etherscan.io/token/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0) is the native token of Polygon. This is similar to Ether in Ethereum. To interact with  Polygon network, [MATIC](https://etherscan.io/token/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0) tokens are required to pay as gas fees.
 
 - On the Polygon chain, the Matic tokens works as native token. This means that a user can pay gas with MATIC as well as send MATIC to other accounts same way as they use ETH to pay gas fees on Ethereum and send ETH to others.
@@ -43,7 +43,7 @@ Ways to get matic token for Mumbai :
 </TabItem>
 <TabItem value="mainnet">
 
-## Polygon Network :fuelpump:
+## Polygon Network
 [MATIC token](https://etherscan.io/token/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0) is the native token of Polygon. This is similar to Ether in Ethereum. To interact with  Polygon, [MATIC](https://etherscan.io/token/0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0) tokens are required to pay as gas fees.
 
 - On the Polygon chain, the Matic tokens works as native token. This means that a user can pay gas with MATIC as well as send MATIC to other accounts same way as they use ETH to pay gas fees on Ethereum and send ETH to others.
@@ -72,7 +72,6 @@ Getting the Matic token is really easy. You can deposit MATIC token from Goerli 
         - [MAX](https://max.maicoin.com/)
         - [MaiCoin](https://www.maicoin.com/)
 
-
         3. Other Exchanges
         - [Coinbase](https://www.coinbase.com/)
         - [Huobi](https://www.huobi.com/)
@@ -88,7 +87,7 @@ Getting the Matic token is really easy. You can deposit MATIC token from Goerli 
         - (Recommended) Use new Polygon Web Wallet: [https://wallet.polygon.technology/](https://wallet.polygon.technology/)
         - You can use Maticjs: [https://maticnetwork.github.io/matic.js/](https://maticnetwork.github.io/matic.js/)
 
-  🎉Voila, you can start interacting with Polygon now 🎉
+  Now you can start interacting with Polygon.
 
 </TabItem>
 </Tabs>

@@ -228,13 +228,13 @@ We will use the Node ID of the first node for the first bootnode and the Node ID
 After the assembly, the multiaddr connection string to node 1, which we will use as the bootnode will look something like this:
 
 ```bash
-/ip4/127.0.0.1/tcp/30301/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
+/ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW
 ```
 
 Similarly, we construct the multiaddr for the second bootnode as shown below:
 
 ```bash
-/ip4/127.0.0.1/tcp/30302/p2p/16Uiu2HAmS9Nq4QAaEiogE4ieJFUYsoH28magT7wSvJPpfUGBj3Hq
+/ip4/127.0.0.1/tcp/20001/p2p/16Uiu2HAmS9Nq4QAaEiogE4ieJFUYsoH28magT7wSvJPpfUGBj3Hq
 ```
 
 ### 2. Generate manifest file
@@ -319,8 +319,8 @@ polygon-edge genesis --consensus polybft --validator-set-size=4 \
 --block-gas-limit 10000000 \
 --premine 0x85da99c8a7c2c95964c8efd687e95e632fc533d6:1000000000000000000000 \
 --epoch-size 10 \
---bootnode /ip4/127.0.0.1/tcp/30301/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW \
---bootnode /ip4/127.0.0.1/tcp/30302/p2p/16Uiu2HAmS9Nq4QAaEiogE4ieJFUYsoH28magT7wSvJPpfUGBj3Hq \
+--bootnode /ip4/127.0.0.1/tcp/10001/p2p/16Uiu2HAmJxxH1tScDX2rLGSU9exnuvZKNM9SoK3v315azp68DLPW \
+--bootnode /ip4/127.0.0.1/tcp/20001/p2p/16Uiu2HAmS9Nq4QAaEiogE4ieJFUYsoH28magT7wSvJPpfUGBj3Hq \
 > genesis.json
 ```
 

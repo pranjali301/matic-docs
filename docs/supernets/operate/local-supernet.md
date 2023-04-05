@@ -430,7 +430,7 @@ Now that we have started the rootchain, we can deploy and initialize the rootcha
 This command starts `ethereum/client-go` container which is Geth node, and deploys the rootchain bridge and the checkpoint manager contracts.
 
   ```bash
-  ./polygon-edge rootchain init-contracts --manifest ./manifest.json --path ./core-contracts/artifacts --json-rpc http://127.0.0.1:8545 --admin-key <hex_encoded_private_key>
+  ./polygon-edge rootchain init-contracts --manifest ./manifest.json --test ./core-contracts/artifacts --json-rpc http://127.0.0.1:8545 --admin-key <hex_encoded_private_key>
   ```
 
 > Note that the `--admin-key` option is optional, and if you omit it, the default account in your local Ethereum client will be used.
@@ -712,7 +712,7 @@ To run a childchain cluster, we'll use the `./polygon-edge server` command with 
 </details>
 
   ```bash
-  ./polygon-edge server --data-dir ./test-chain-1 --chain genesis.json --grpc-address :5001 --libp2p :30301 --jsonrpc :9545 --seal --log-level DEBUG
+  ./polygon-edge server --data-dir ./test-chain-1 --chain genesis.json --grpc-address :5001 --libp2p :30301 --jsonrpc :10001 --seal --log-level DEBUG
 
   ./polygon-edge server --data-dir ./test-chain-2 --chain genesis.json --grpc-address :5002 --libp2p :30302 --jsonrpc :10002 --seal --log-level DEBUG
 

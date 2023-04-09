@@ -1171,6 +1171,7 @@ module.exports = {
 
   // #####################################################################
 
+  /* Polygon ID docs here: https://0xpolygonid.github.io/tutorials/
   polygonid: [
     {
       type: 'html',
@@ -1226,6 +1227,7 @@ module.exports = {
     "polygonid/contracts/overview",
     "polygonid/wallet/wallet-overview",
   ],
+*/
 
   // #####################################################################
 
@@ -1242,7 +1244,7 @@ module.exports = {
       link: {
         type: "generated-index",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         "supernets/get-started/what-are-supernets",
         "supernets/get-started/why-supernets",
@@ -1254,7 +1256,7 @@ module.exports = {
       link: {
         type: "generated-index",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         "supernets/design/overview",
         {
@@ -1311,28 +1313,35 @@ module.exports = {
       link: {
         type: "generated-index",
       },
-      collapsed: false,
+      collapsed: true,
       items: [
         "supernets/operate/supernets-quick-start",
-        "supernets/operate/supernets-requirements",
-        "supernets/operate/supernets-install",
+        {
+              type: "category",
+              label: "Setup & Installation",
+              link: {
+                type: "generated-index",
+              },
+              items: [
+                "supernets/operate/supernets-requirements",
+                "supernets/operate/supernets-install",
+              ],
+        },
         {
           type: "category",
-          label: "Deploy in non-bridge mode",
+          label: "Launch a Local Private Supernet",
           link: {
             type: "generated-index",
           },
-          collapsed: true,
           items: [
-            "supernets/operate/supernets-local-deploy",
+            "supernets/operate/supernets-local-deploy-supernet",
             "supernets/operate/supernets-setup-dev-env",
+            "supernets/operate/supernets-bridge",
           ],
         },
-        "supernets/operate/supernets-local-deploy-supernet",
-        "supernets/operate/supernets-bridge",
         {
           type: "category",
-          label: "Interfaces",
+          label: "Supernet Interfaces",
           link: {
             type: "generated-index",
           },
@@ -1391,7 +1400,7 @@ module.exports = {
         },
         {
           type: "category",
-          label: "Modules",
+          label: "Childchain Modules",
           link: {
             type: "generated-index",
           },
@@ -1411,7 +1420,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "JSON RPC Commands",
+      label: "RPC API Reference",
       link: {
         type: "generated-index",
       },

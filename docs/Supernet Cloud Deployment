@@ -1,0 +1,172 @@
+Polygon Supernet is a blockchain stack powered by Polygon Edge. You can also call it an ecosystem — a set of modules that work seamlessly together and add to each other's functionality.
+They allow you to create a dedicated blockchain network optimized to fit your particular needs and easily deploy your Web3 applications on it without sacrificing security or performance.
+
+
+
+Launch a Private Supernet (AWS Cloud Deployment)
+
+Architecture Overview:
+
+The following resources will be deployed using Terraform:
+
+Dedicated VPC
+
+4 validator nodes (which are also bootnodes)
+
+1 rootchain (L1) node running Geth
+
+Application Load Balancer used for exposing the JSON-RPC endpoint
+
+
+
+Requirements:
+
+Ensure you have the following system prerequisites:
+
+TERRAFORM: https://developer.hashicorp.com/terraform/downloads
+
+AWS-CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+
+PIP/PYTHON3: https://phoenixnap.com/kb/how-to-install-pip-on-ubuntu
+
+BOTO3: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html
+
+BOTOCORE: https://globedrill.com/install-botocore-python3-server-using-pip/
+
+GO: https://www.digitalocean.com/community/tutorials/how-to-install-go-on-ubuntu-20-04
+
+POLYGON_EDGE: https://github.com/0xPolygon/polygon-edge
+
+Before getting started, ensure you have Go installed on your system (version >= 1.15 and <= 1.19)
+
+Use the following commands to clone the Polygon Edge repository and build from source:
+
+github.com/0xPolygon/polygon-edge.git
+
+cd polygon-edge/
+
+go build -o polygon-edge main.go
+
+sudo mv polygon-edge /usr/local/bin
+
+To set up a devnet on AWS, This guide provides comprehensive instructions on how to use Terraform to set up a Virtual Private Cloud (VPC), subnets, security groups, and EC2 instances, followed by instructions on configuring nodes using Ansible.
+
+Terraform Deployment Steps:
+1. Clone the repo
+
+git clone git@github.com:maticnetwork/terraform-polygon-supernets.git
+
+2. Change the current working directory to terraform-polygon-supernets.
+
+cd terraform-polygon-supernets
+
+3. Configure AWS on your terminal.
+
+You can use AWS configure, aws configure sso, or set appropriate variables in ~/.aws/credentials or in ~/.aws/config. Alternatively,
+
+directly set access keys as shown below.
+
+$ export AWS_ACCESS_KEY_ID=
+
+$ export AWS_SECRET_ACCESS_KEY=
+
+$ export AWS_DEFAULT_REGION=us-west-2
+
+Note: Ensure that the AWS user role has the necessary permissions to create all resources listed.
+
+4. Now we'll run terraform init to download and install the provider plugins, which are used to interact with AWS, and initialize the backend to store the state file.
+
+terraform init
+
+5. Next, we're going to "plan" and "apply" using Terraform
+
+terraform plan
+
+terraform apply
+
+You will see the output like this:
+
+
+
+Save terraform output pk_ansible to a file. And change permissions so that only the owner of the file can read and write to the file.
+
+Run these commands and save the devnet_private.key
+
+terraform output pk_ansible > ~/devnet_private.key
+
+chmod 600 ~/devnet_private.key
+
+By now, of the necessary AWS infrastructure for operating a Supernet should be deployed. It's a good time to sign in to your AWS Console and examine the setup.
+
+Ansible Deployment Steps:
+Step1:- We need to create a separate ec2 instance configured for ansible in same VPC(node validator VPC) to run ansible script so that ansible will have access to all the validator node.
+
+Note- Paste the devnet key with this position ~/cert/devnet_private.key
+
+eval "$(ssh-agent)"
+
+ssh-add ~/cert/devnet_private.key
+
+Step2:- Change working directory to ansible
+
+cd ansible
+
+Step3:- Create the ansible vault passwords file. Then store your vault password securely in a file or a secret manager.
+
+touch password.txt
+
+VAULT_PASSWORD=
+
+Step4:- Install session-manager-plugin with
+
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+
+sudo dpkg -i session-manager-plugin.deb
+
+Initilise ssh-agent with eval "$(ssh-agent)" and add private key to ssh-agent with ssh-add ~/cert/devnet_private.key
+
+Step5:- The Ansible playbooks that we use require certain external dependencies. In order to retrieve these collections, you can run the following command:
+
+ansible-galaxy install -r requirements.yml
+
+Step6:- In case you've altered your region, company name, or deployment name, remember to modify the inventory/aws_ec2.yml file accordingly.
+
+regions: us-west-2
+
+###
+
+filters:
+
+tag:BaseDN: "<YOUR_DEPLOYMENT_NAME>.edge.<YOUR_COMPANY>.private"
+
+Step7:- Replace the --premine values with the accounts that you want to premine in roles/edge/templates/bootstrap.sh. Either update the value for loadtest_account in group_vars/all.yml or replace with a new line. Format: <address>:<balance>. Default premined balance: 1000000000000000000000000
+
+Step8:- Check if your instances are available by running the following.
+
+ansible-inventory --graph
+
+Step9:- Check the inventory
+
+ansible-inventory --graph --inventory inventory/aws_ec2.yml
+
+Step10:- Create some aliases to shorten commands:
+
+alias ansible-playbook='ansible-playbook --inventory inventory/aws_ec2.yml --vault-password-file=password.txt --extra-vars "@local-extra-vars.yml"'
+
+alias ansible='ansible --inventory inventory/aws_ec2.yml --vault-password-file=password.txt --extra-vars "@local-extra-vars.yml"'
+
+Step11:- Confirm we can ping everything.
+
+ansible all -m ping
+
+Check all your instances are reachable by ansible
+
+ansible --inventory inventory/aws_ec2.yml --vault-password-file=password.txt --extra-vars "@local-extra-vars.yml" all -m ping
+
+Step12:- Run ansible playbook
+
+ansible-playbook --inventory inventory/aws_ec2.yml --vault-password-file=password.txt --extra-vars "@local-extra-vars.yml" site.yml
+
+After the full playbook runs, you should have a functional Supernet.
+
+Thank You:)
